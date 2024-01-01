@@ -1,0 +1,60 @@
+﻿@model List<AssignmentViewModel>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assgin page</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/StudyCase.UI.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header style="text-align: center;">
+        <h2>Görevlendirme</h2>
+        <h3>Bitiş Süresi :(@Math.Round(Model.OrderByDescending(x=> x.Developer.TotalWorkDone).FirstOrDefault().Developer.TotalWorkDone, 2)s)</h3>
+    </header>
+    <div class="container">
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-@(12 / Model.Count )">
+                    <h5>@item.Developer.Name / (@Math.Round(item.Developer.TotalWorkDone, 2)s)</h5>
+                    <hr />
+                    @foreach (var task in item.Tasks)
+                    {
+                        <p>Task: @task.Name</p>
+                        <p>Duration: @task.Duration</p>
+                        <p>Difficulty: @task.Difficulty</p>
+                        <p>ApiId: @task.ApiId</p>
+                        <hr />
+                    }
+                    @*<table>
+                @*<thead>
+                <tr>
+                <th>@item.Developer.Name / (@Math.Round(item.Developer.TotalWorkDone, 2)s)</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var task in item.Tasks)
+                {
+                <tr>
+                <td>@task.Name / @task.Difficulty / @</td>
+                </tr>
+                }
+                </tbody>
+                </table>*@
+                </div>
+            }
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
